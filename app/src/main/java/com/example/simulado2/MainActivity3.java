@@ -81,14 +81,12 @@ public class MainActivity3 extends AppCompatActivity {
 
     private void recuperarDados() {
         Intent intent = getIntent();
-
         try {
             String nomeRioExtra = intent.getStringExtra("nome_rio");
             int quantidadeMedicoesExtra = intent.getIntExtra("qtd_medicoes", 0);
             double mediaAlturaExtra = intent.getDoubleExtra("media_altura", 0.0);
             double maiorAlturaExtra = intent.getDoubleExtra("maior_altura", 0.0);
             double menorAlturaExtra = intent.getDoubleExtra("menor_altura", 0.0);
-
             mostrarDados(nomeRioExtra, quantidadeMedicoesExtra, mediaAlturaExtra, maiorAlturaExtra, menorAlturaExtra);
         } catch (Exception e) {
             Log.e("ERROR", "Exception: " + e.getMessage());

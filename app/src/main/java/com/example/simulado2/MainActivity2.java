@@ -30,6 +30,7 @@ public class MainActivity2 extends AppCompatActivity {
     private TextView txtNomeRio;
     private TextView txtLimiteMinimo;
     private TextView txtLimiteMaximo;
+    private Button btnVoltar;
 
     private String nomeRio;
     private double valorMinimo;
@@ -55,21 +56,20 @@ public class MainActivity2 extends AppCompatActivity {
         instanciarElementosInterface();
         lerPreferencias();
 
+        btnVoltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         txtNomeRio.setText("Rio em observação: " + nomeRio);
         txtLimiteMinimo.setText("Limite Mínimo: " + valorMinimo + " metros.");
         txtLimiteMaximo.setText("Limite Máximo: " + valorMaximo + " metros.");
 
-//        Log.d("DATA", "Nome do rio: " + nomeRio);
-//        Log.d("DATA", "Valor minimo: " + valorMinimo);
-//        Log.d("DATA", "Valor maximo: " + valorMaximo);
-
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Log.d("DATA", "Data da leitura: " + etDateDataLeitura.getText().toString());
-//                Log.d("DATA", "Hora da leitura: " + etTimeHoraLeitura.getText().toString());
-//                Log.d("DATA", "Altura leitura: " + etNumberDecimalAlturaLeitura.getText().toString());
-
                 try {
                     String dataLeitura = etDateDataLeitura.getText().toString();
                     String horaLeitura = etTimeHoraLeitura.getText().toString();
@@ -115,10 +115,8 @@ public class MainActivity2 extends AppCompatActivity {
                     it3.putExtra("media_altura", mediaDeAlturaDasMedicoes);
                     it3.putExtra("maior_altura", maiorAlturaRegistrada);
                     it3.putExtra("menor_altura", menorAlturaRegistrada);
-
                     etTimeHoraLeitura.setText("");
                     etNumberDecimalAlturaLeitura.setText("");
-
                     startActivity(it3);
                 } catch (IllegalArgumentException e) {
                     Toast.makeText(MainActivity2.this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -141,6 +139,7 @@ public class MainActivity2 extends AppCompatActivity {
         txtNomeRio = findViewById(R.id.txtNomeRio);
         txtLimiteMinimo = findViewById(R.id.txtLimiteMinimo);
         txtLimiteMaximo = findViewById(R.id.txtLimiteMaximo);
+        btnVoltar = findViewById(R.id.btnVoltar);
         Log.d("SUCCESS", "Elementos de interface da MA2 instanciados!");
     }
 
@@ -149,7 +148,6 @@ public class MainActivity2 extends AppCompatActivity {
         String nomeRioPreferences = preferences.getString(CHAVE_NOME_RIO, "nome_rio");
         String valorMinimoPreferences = preferences.getString(CHAVE_VALOR_MINIMO, "valor_minimo");
         String valorMaximoPreferences = preferences.getString(CHAVE_VALOR_MAXIMO, "valor_maximo");
-
         nomeRio = nomeRioPreferences;
         valorMinimo = Double.parseDouble(valorMinimoPreferences);
         valorMaximo = Double.parseDouble(valorMaximoPreferences);
